@@ -1,0 +1,64 @@
+<div class="container-fluid p-5" *ngIf="librosArr != null || librosArr != ''">
+  <h1 class="pb-4">{{ titulo }}</h1>
+  <p class="{{ alertClass }}">{{ mensaje }}</p>
+  <form class="pb-4" (ngSubmit)="addLibro()">
+    <div class="form-group">
+      <label for="titulo">Título</label>
+      <input
+        type="text"
+        class="form-control"
+        name="titulo"
+        placeholder="Escribir el título"
+        [(ngModel)]="libro.titulo"
+      />
+    </div>
+    <div class="form-group">
+      <label for="categoria">Categoría</label>
+      <input
+        type="text"
+        class="form-control"
+        name="categoria"
+        placeholder="Escribir la categoría"
+        [(ngModel)]="libro.categoria"
+      />
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary">Agregar Libro</button>
+    </div>
+  </form>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Título</th>
+        <th scope="col">Categoría</th>
+        <th scope="col">Estado</th>
+        <th scope="col" colspan="2">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let libro of librosArr">
+        <th scope="row">{{ libro.id }}</th>
+        <td>{{ libro.titulo }}</td>
+        <td>{{ libro.categoria }}</td>
+        <div *ngIf="libro.activo == 1; then thenBlock; else elseBlock"></div>
+        <ng-template #thenBlock
+          ><td class="text-success">Activo</td></ng-template
+        >
+        <ng-template #elseBlock
+          ><td class="text-danger">Inactivo</td></ng-template
+        >
+        <td>
+          <button class="btn btn-info" routerLink="edit/{{ libro.id }}">
+            Edit
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-danger" (click)="deleteLibro(libro.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

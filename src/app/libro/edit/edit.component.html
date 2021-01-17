@@ -1,0 +1,24 @@
+<form class="container-fluid p-5" (ngSubmit)="updateLibro()">
+  <div class="form-group">
+    <label for="titulo">Título</label>
+    <input
+      type="text"
+      class="form-control"
+      name="titulo"
+      [(ngModel)]="libro.titulo"
+    />
+  </div>
+  <div class="form-group">
+    <label for="categoria">Categoría</label>
+    <input
+      type="text"
+      class="form-control"
+      name="categoria"
+      [(ngModel)]="libro.categoria"
+    />
+  </div>
+  <div class="form-group">
+    <button class="btn btn-light" routerLink="/libros">Atrás</button>
+    <button class="btn btn-primary ml-4">Actualizar Libro</button>
+  </div>
+</form>
